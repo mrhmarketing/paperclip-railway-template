@@ -10,8 +10,7 @@
   "dependencies": {
     "paperclipai": "latest",
     "@anthropic-ai/claude-code": "latest",
-    "@openai/codex": "latest",
-    "@nousresearch/paperclip-adapter-hermes": "latest"
+    "@openai/codex": "latest"
   },
   "engines": {
     "node": ">=20"
