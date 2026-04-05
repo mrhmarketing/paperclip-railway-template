@@ -1,7 +1,7 @@
 {
-  "name": "paperclip-railway",
+  "name": "paperclip-hermes-railway",
   "version": "1.0.0",
-  "description": "Railway wrapper for paperclipai/paperclip with a web-based setup page",
+  "description": "Railway wrapper for Paperclip + Hermes Agent with web-based setup",
   "private": true,
   "scripts": {
     "start": "node scripts/start.mjs",
@@ -10,7 +10,8 @@
   "dependencies": {
     "paperclipai": "latest",
     "@anthropic-ai/claude-code": "latest",
-    "@openai/codex": "latest"
+    "@openai/codex": "latest",
+    "@nousresearch/paperclip-adapter-hermes": "latest"
   },
   "engines": {
     "node": ">=20"
