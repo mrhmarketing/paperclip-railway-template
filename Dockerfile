@@ -8,10 +8,20 @@ RUN apt-get update \
        python3-pip \
        python3-venv \
        git \
+       curl \
   && rm -rf /var/lib/apt/lists/*
 
-# ── Install Hermes Agent CLI ──
-RUN pip install hermes-agent --break-system-packages
+# ── Install uv (fast Python package manager) ──
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:$PATH"
+
+# ── Install Hermes Agent from source ──
+RUN git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git /opt/hermes-agent \
+  && cd /opt/hermes-agent \
+  && uv venv venv --python 3.11 \
+  && VIRTUAL_ENV=/opt/hermes-agent/venv uv pip install -e ".[all]" \
+  && mkdir -p /usr/local/bin \
+  && ln -sf /opt/hermes-agent/venv/bin/hermes /usr/local/bin/hermes
 
 # ── Create non-root user (Claude CLI refuses --dangerously-skip-permissions as root) ──
 RUN groupadd -r paperclip && useradd -r -g paperclip -m -d /home/paperclip -s /bin/bash paperclip
